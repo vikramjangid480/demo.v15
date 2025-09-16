@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['images.unsplash.com', 'localhost'],
+    domains: ['images.unsplash.com', 'localhost', '10.2.0.2'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -12,30 +12,38 @@ const nextConfig = {
         protocol: 'http',
         hostname: 'localhost',
         port: '8000',
+      },
+      {
+        protocol: 'http',
+        hostname: '10.2.0.2',
+        port: '3000',
       }
     ],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60,
   },
   async rewrites() {
     return [
       {
-        source: '/getBlogs.php',
-        destination: 'http://localhost:8000/getBlogs.php',
+        source: '/api/blogs',
+        destination: 'http://localhost:8000/api/blogs',
       },
       {
-        source: '/getCategories.php',
-        destination: 'http://localhost:8000/getCategories.php',
+        source: '/api/categories',
+        destination: 'http://localhost:8000/api/categories',
       },
       {
-        source: '/getBanner.php',
-        destination: 'http://localhost:8000/getBanner.php',
+        source: '/api/banner',
+        destination: 'http://localhost:8000/api/banner',
       },
       {
-        source: '/addBlog.php',
-        destination: 'http://localhost:8000/addBlog.php',
+        source: '/api/admin/blogs',
+        destination: 'http://localhost:8000/api/admin/blogs',
       },
       {
-        source: '/login.php',
-        destination: 'http://localhost:8000/login.php',
+        source: '/api/auth/login',
+        destination: 'http://localhost:8000/api/auth/login',
       },
     ]
   },

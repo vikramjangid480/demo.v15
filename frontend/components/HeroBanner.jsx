@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const HeroBanner = ({ banners = [] }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -36,7 +37,10 @@ const HeroBanner = ({ banners = [] }) => {
       image_url: 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
       link_url: '/blog/reading-personal-growth'
     }
-  ]
+  ].map(banner => ({
+    ...banner,
+    image_url: new URL(banner.image_url).toString() // Ensure valid URL format
+  }))
 
   const slides = banners.length > 0 ? banners : defaultBanners
 
@@ -77,10 +81,17 @@ const HeroBanner = ({ banners = [] }) => {
     >
       {/* Background Image */}
       <div className="absolute inset-0">
-        <img
+        <Image
           src={currentBanner.image_url}
           alt={currentBanner.title}
-          className="w-full h-full object-cover transition-opacity duration-500"
+          fill
+          className="object-cover transition-opacity duration-500"
+          priority
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 80vw"
+          quality={85}
+          loading="eager"
+          blurDataURL={currentBanner.image_url + '&w=50&blur=20'}
+          placeholder="blur"
         />
         <div className="absolute inset-0 hero-section"></div>
       </div>

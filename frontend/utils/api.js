@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // API base URL - works with Next.js environment variables and rewrites
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 
-                     (typeof window !== 'undefined' ? '/api' : 'http://localhost:8000')
+                     (typeof window !== 'undefined' ? '' : 'http://localhost:8000')
 
 // Create axios instance
 const api = axios.create({
@@ -46,22 +46,22 @@ api.interceptors.response.use(
 export const blogAPI = {
   // Get all blogs with optional filters
   getBlogs: (params = {}) => {
-    return api.get('/getBlogs.php', { params })
+    return api.get('/api/blogs', { params })
   },
   
   // Get single blog by slug
   getBlogBySlug: (slug) => {
-    return api.get(`/getBlogs.php?slug=${slug}`)
+    return api.get(`/api/blogs/slug/${slug}`)
   },
   
   // Get single blog by ID
   getBlogById: (id) => {
-    return api.get(`/getBlogs.php?id=${id}`)
+    return api.get(`/api/blogs/${id}`)
   },
   
   // Create new blog (admin)
   createBlog: (formData) => {
-    return api.post('/addBlog.php', formData, {
+    return api.post('/api/admin/blogs', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
@@ -70,12 +70,12 @@ export const blogAPI = {
   
   // Update blog (admin)
   updateBlog: (blogData) => {
-    return api.put('/addBlog.php', blogData)
+    return api.put('/api/admin/blogs', blogData)
   },
   
   // Delete blog (admin)
   deleteBlog: (id) => {
-    return api.delete(`/addBlog.php?id=${id}`)
+    return api.delete(`/api/admin/blogs/${id}`)
   }
 }
 
@@ -83,7 +83,7 @@ export const blogAPI = {
 export const categoryAPI = {
   // Get all categories
   getCategories: (params = {}) => {
-    return api.get('/getCategories.php', { params })
+    return api.get('/api/categories', { params })
   }
 }
 
@@ -91,7 +91,7 @@ export const categoryAPI = {
 export const bannerAPI = {
   // Get banner images
   getBanners: () => {
-    return api.get('/getBanner.php')
+    return api.get('/api/banner')
   }
 }
 

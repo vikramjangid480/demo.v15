@@ -7,26 +7,23 @@ const BlogCard = ({ blog, featured = false }) => {
   const defaultImage = 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
   
   return (
-    <article className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden border border-gray-100 transform hover:-translate-y-1">
+    <div className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 transform hover:-translate-y-1">
       {/* Image */}
       <div className="relative h-48 overflow-hidden">
         <img
           src={blog.featured_image || defaultImage}
           alt={blog.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           onError={(e) => {
             e.target.src = defaultImage
           }}
         />
         
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        
         {/* Featured Badge */}
         {blog.is_featured && (
           <div className="absolute top-3 left-3">
-            <span className="bg-gradient-to-r from-primary-500 to-primary-600 text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg">
-              ⭐ Featured
+            <span className="bg-primary-600 text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg">
+              Featured
             </span>
           </div>
         )}
@@ -35,7 +32,7 @@ const BlogCard = ({ blog, featured = false }) => {
         {blog.category && (
           <div className="absolute top-3 right-3">
             <Link href={`/category/${blog.category.slug}`}>
-              <span className="bg-white/90 backdrop-blur-sm text-navy-800 px-2.5 py-1 rounded-full text-xs font-semibold hover:bg-white transition-colors shadow-lg">
+              <span className="bg-white text-navy-800 px-2.5 py-1 rounded-full text-xs font-semibold hover:bg-gray-50 transition-colors shadow-lg">
                 {blog.category.name}
               </span>
             </Link>
@@ -82,7 +79,7 @@ const BlogCard = ({ blog, featured = false }) => {
           </svg>
         </Link>
       </div>
-    </article>
+    </div>
   )
 }
 
