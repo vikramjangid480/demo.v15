@@ -30,6 +30,14 @@ const nextConfig = {
         destination: 'http://localhost:8000/api/blogs',
       },
       {
+        source: '/api/blogs/slug/:slug',
+        destination: 'http://localhost:8000/api/blogs/slug/:slug',
+      },
+      {
+        source: '/api/blogs/:id',
+        destination: 'http://localhost:8000/api/blogs/:id',
+      },
+      {
         source: '/api/categories',
         destination: 'http://localhost:8000/api/categories',
       },
@@ -40,6 +48,10 @@ const nextConfig = {
       {
         source: '/api/admin/blogs',
         destination: 'http://localhost:8000/api/admin/blogs',
+      },
+      {
+        source: '/api/admin/blogs/:id',
+        destination: 'http://localhost:8000/api/admin/blogs/:id',
       },
       {
         source: '/api/auth/login',

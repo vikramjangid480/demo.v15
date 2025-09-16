@@ -455,7 +455,7 @@ const BlogDetailPage = ({ blog: initialBlog, relatedArticles }) => {
                           {article.excerpt}
                         </p>
                         <div className="flex items-center text-xs text-navy-400">
-                          <Calendar className="h-3 w-3 mr-1" />
+                          <Calendar className="h-3   w-3 mr-1" />
                           <span>{utils.formatDate(article.created_at)}</span>
                           <span className="mx-2">•</span>
                           <Eye className="h-3 w-3 mr-1" />
