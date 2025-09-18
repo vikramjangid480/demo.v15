@@ -154,8 +154,7 @@ const HomePage = ({ initialData, banners }) => {
                   {/* Popular Articles */}
                   {popularBlogs.length > 0 && (
                     <div className="bg-white rounded-xl shadow-lg p-6">
-                      <h3 className="text-lg font-semibold text-navy-800 mb-6 flex items-center">
-                        <TrendingUp className="h-5 w-5 mr-2 text-primary-500" />
+                      <h3 className="text-lg font-semibold text-navy-800 mb-6">
                         Popular Articles
                       </h3>
                       
@@ -239,64 +238,61 @@ const HomePage = ({ initialData, banners }) => {
                             <div key={blog.id} className={`group ${
                               index === 0 ? 'md:col-span-2 xl:col-span-1' : ''
                             }`}>
-                              <article className="bg-white rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 h-full transform group-hover:-translate-y-2">
-                                {/* Image Container with Overlay */}
-                                <div className="relative h-56 overflow-hidden">
+                              <article className="bg-white rounded-2xl overflow-hidden border border-gray-200 h-full hover:shadow-lg transition-shadow duration-300">
+                                {/* Image Container */}
+                                <div className="relative h-48 overflow-hidden">
                                   <img
                                     src={blog.featured_image || 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}
                                     alt={blog.title}
-                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                    className="w-full h-full object-cover"
                                     onError={(e) => {
                                       e.target.src = 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
                                     }}
                                   />
-                                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
                                   
                                   {/* Category Badge */}
                                   {blog.category && (
-                                    <div className="absolute top-4 right-4">
-                                      <Link href={`/category/${blog.category.slug}`}>
-                                        <span className="bg-white/90 backdrop-blur-sm text-navy-800 px-3 py-1.5 rounded-full text-sm font-medium hover:bg-white transition-colors shadow-lg">
-                                          {blog.category.name}
-                                        </span>
-                                      </Link>
+                                    <div className="absolute top-4 left-4">
+                                      <span className="bg-primary-500 text-white px-3 py-1 rounded text-sm font-medium uppercase tracking-wide">
+                                        {blog.category.name}
+                                      </span>
                                     </div>
                                   )}
                                 </div>
 
                                 {/* Content */}
                                 <div className="p-6">
-                                  {/* Meta Info */}
-                                  <div className="flex items-center text-sm text-navy-500 mb-3">
-                                    <Calendar className="h-4 w-4 mr-2" />
-                                    <span className="font-medium">{new Date(blog.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-                                    <div className="flex items-center ml-4">
-                                      <Eye className="h-4 w-4 mr-1" />
-                                      <span>{blog.view_count || 0} views</span>
-                                    </div>
-                                  </div>
-
                                   {/* Title */}
-                                  <h3 className="font-bold text-xl text-navy-800 mb-3 leading-tight group-hover:text-primary-600 transition-colors duration-300 line-clamp-2">
-                                    <Link href={`/blog/${blog.slug}`}>
+                                  <h3 className="font-bold text-2xl text-gray-800 mb-4 leading-tight">
+                                    <Link href={`/blog/${blog.slug}`} className="hover:text-primary-600 transition-colors">
                                       {blog.title}
                                     </Link>
                                   </h3>
 
-                                  {/* Excerpt */}
-                                  <p className="text-navy-600 leading-relaxed line-clamp-3 mb-4">
-                                    {blog.excerpt || (blog.content ? blog.content.substring(0, 120) + '...' : 'Click to read this amazing article...')}
+                                  {/* Description */}
+                                  <p className="text-gray-600 mb-4 text-base leading-relaxed">
+                                    {blog.excerpt || (blog.content ? blog.content.substring(0, 120) + '...' : 'Discover more in this amazing article...')}
                                   </p>
 
-                                  {/* Read More Link */}
+                                  {/* Author and Read Time */}
+                                  <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                                    <div className="flex items-center">
+                                      <div className="w-6 h-6 bg-gray-300 rounded-full mr-2"></div>
+                                      <span>Sarah Johnson</span>
+                                    </div>
+                                    <div className="flex items-center">
+                                      <Eye className="h-4 w-4 mr-1" />
+                                      <span>8 min read</span>
+                                    </div>
+                                  </div>
+
+                                  {/* Read Article Button */}
                                   <Link
                                     href={`/blog/${blog.slug}`}
-                                    className="inline-flex items-center text-primary-600 hover:text-primary-700 font-semibold group/link transition-colors duration-200"
+                                    className="text-primary-600 hover:text-primary-700 font-semibold text-sm underline transition-colors"
                                   >
                                     Read Article
-                                    <svg className="w-4 h-4 ml-2 transform group-hover/link:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                    </svg>
                                   </Link>
                                 </div>
                               </article>
@@ -311,7 +307,7 @@ const HomePage = ({ initialData, banners }) => {
                               href="/featured"
                               className="group inline-flex items-center bg-gradient-to-r from-primary-500 to-primary-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-primary-600 hover:to-primary-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                             >
-                              Explore All Featured Articles
+                              See More
                               <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                               </svg>
@@ -374,13 +370,13 @@ const HomePage = ({ initialData, banners }) => {
                           {/* Articles Grid */}
                           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                             {(search || selectedCategory || tag ? blogs : displayLatestBlogs).map((blog, index) => (
-                              <article key={blog.id} className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden border border-gray-100 transform hover:-translate-y-1">
+                              <article key={blog.id} className="group bg-white rounded-2xl overflow-hidden border border-gray-200 h-full hover:shadow-lg transition-shadow duration-300">
                                 {/* Image Container */}
                                 <div className="relative h-48 overflow-hidden">
                                   <img
                                     src={blog.featured_image || 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}
                                     alt={blog.title}
-                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                    className="w-full h-full object-cover"
                                     onError={(e) => {
                                       e.target.src = 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
                                     }}
@@ -388,58 +384,48 @@ const HomePage = ({ initialData, banners }) => {
                                   
                                   {/* Category Badge */}
                                   {blog.category && (
-                                    <div className="absolute top-3 left-3">
-                                      <Link href={`/category/${blog.category.slug}`}>
-                                        <span className="bg-white/90 backdrop-blur-sm text-navy-800 px-2.5 py-1 rounded-full text-xs font-semibold hover:bg-white transition-colors shadow-lg">
-                                          {blog.category.name}
-                                        </span>
-                                      </Link>
+                                    <div className="absolute top-4 left-4">
+                                      <span className="bg-primary-500 text-white px-3 py-1 rounded text-sm font-medium uppercase tracking-wide">
+                                        {blog.category.name}
+                                      </span>
                                     </div>
                                   )}
                                   
-                                  {/* Featured Indicator */}
-                                  {blog.is_featured && (
-                                    <div className="absolute top-3 right-3">
-                                      <div className="w-3 h-3 bg-primary-500 rounded-full shadow-lg animate-pulse"></div>
-                                    </div>
-                                  )}
+
                                 </div>
 
                                 {/* Content */}
                                 <div className="p-6">
-                                  {/* Meta Information */}
-                                  <div className="flex items-center justify-between text-sm text-navy-500 mb-3">
-                                    <div className="flex items-center">
-                                      <Calendar className="h-4 w-4 mr-1.5" />
-                                      <span className="font-medium">{new Date(blog.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
-                                    </div>
-                                    <div className="flex items-center">
-                                      <Eye className="h-4 w-4 mr-1" />
-                                      <span>{blog.view_count || 0}</span>
-                                    </div>
-                                  </div>
-
                                   {/* Title */}
-                                  <h3 className="font-bold text-lg text-navy-800 mb-3 leading-tight group-hover:text-primary-600 transition-colors duration-300 line-clamp-2">
-                                    <Link href={`/blog/${blog.slug}`}>
+                                  <h3 className="font-bold text-xl text-gray-800 mb-4 leading-tight">
+                                    <Link href={`/blog/${blog.slug}`} className="hover:text-primary-600 transition-colors">
                                       {blog.title}
                                     </Link>
                                   </h3>
 
-                                  {/* Excerpt */}
-                                  <p className="text-navy-600 text-sm leading-relaxed line-clamp-2 mb-4">
+                                  {/* Description */}
+                                  <p className="text-gray-600 mb-4 text-base leading-relaxed">
                                     {blog.excerpt || (blog.content ? blog.content.substring(0, 100) + '...' : 'Discover more in this article...')}
                                   </p>
 
-                                  {/* Read More Link */}
+                                  {/* Author and Read Time */}
+                                  <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                                    <div className="flex items-center">
+                                      <div className="w-6 h-6 bg-gray-300 rounded-full mr-2"></div>
+                                      <span>Dr. Emma Wilson</span>
+                                    </div>
+                                    <div className="flex items-center">
+                                      <Eye className="h-4 w-4 mr-1" />
+                                      <span>10 min read</span>
+                                    </div>
+                                  </div>
+
+                                  {/* Read Article Button */}
                                   <Link
                                     href={`/blog/${blog.slug}`}
-                                    className="inline-flex items-center text-primary-600 hover:text-primary-700 font-semibold text-sm group/link transition-colors duration-200"
+                                    className="text-primary-600 hover:text-primary-700 font-semibold text-sm underline transition-colors"
                                   >
-                                    Continue Reading
-                                    <svg className="w-3.5 h-3.5 ml-1.5 transform group-hover/link:translate-x-0.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                    </svg>
+                                    Read Article
                                   </Link>
                                 </div>
                               </article>
@@ -453,7 +439,7 @@ const HomePage = ({ initialData, banners }) => {
                                 href="/latest"
                                 className="group inline-flex items-center bg-navy-700 text-white px-8 py-4 rounded-xl font-semibold hover:bg-navy-800 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                               >
-                                View All Latest Articles
+                                See More
                                 <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                 </svg>

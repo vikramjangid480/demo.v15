@@ -40,8 +40,10 @@ const BlogDetailPage = ({ blog: initialBlog, relatedArticles }) => {
       setBlog(response.blog)
       setRelatedBooks(response.blog.related_books || [])
     } catch (err) {
-      if (err.status === 404) {
+      if (err.response?.status === 404 || err.status === 404) {
         setError('Blog post not found')
+      } else if (err.response?.status >= 500 || err.status >= 500) {
+        setError('Unable to load blog post. Please try again later.')
       } else {
         setError('Failed to load blog post. Please try again.')
       }

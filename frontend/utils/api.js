@@ -46,17 +46,17 @@ api.interceptors.response.use(
 export const blogAPI = {
   // Get all blogs with optional filters
   getBlogs: (params = {}) => {
-    return api.get('/api/blogs', { params })
+    return api.get('/getBlogs.php', { params })
   },
   
   // Get single blog by slug
   getBlogBySlug: (slug) => {
-    return api.get(`/api/blogs/slug/${slug}`)
+    return api.get(`/getBlogs.php?slug=${slug}`)
   },
   
   // Get single blog by ID
   getBlogById: (id) => {
-    return api.get(`/api/blogs/${id}`)
+    return api.get(`/getBlogs.php?id=${id}`)
   },
   
   // Create new blog (admin)
@@ -83,7 +83,7 @@ export const blogAPI = {
 export const categoryAPI = {
   // Get all categories
   getCategories: (params = {}) => {
-    return api.get('/api/categories', { params })
+    return api.get('/getCategories.php', { params })
   }
 }
 
@@ -91,7 +91,7 @@ export const categoryAPI = {
 export const bannerAPI = {
   // Get banner images
   getBanners: () => {
-    return api.get('/api/banner')
+    return api.get('/getBanner.php')
   }
 }
 
