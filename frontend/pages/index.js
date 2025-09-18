@@ -252,13 +252,6 @@ const HomePage = ({ initialData, banners }) => {
                                   />
                                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                   
-                                  {/* Featured Badge */}
-                                  <div className="absolute top-4 left-4">
-                                    <span className="bg-gradient-to-r from-primary-500 to-primary-600 text-white px-3 py-1.5 rounded-full text-sm font-semibold shadow-lg">
-                                      ✨ Featured
-                                    </span>
-                                  </div>
-                                  
                                   {/* Category Badge */}
                                   {blog.category && (
                                     <div className="absolute top-4 right-4">
